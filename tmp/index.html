@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+    <style>
+      .category {
+        display: flex;
+        margin: 30px;
+        /* border: 1px solid black; */
+        flex-wrap: wrap;
+      }
+      .cart {
+        /* display: flex; */
+        margin: 30px;
+        /* border: 1px solid black; */
+        /* flex-wrap: wrap; */
+      }
+      .item-container {
+        display: flex;
+        justify-content: center;
+        /* background-color: cyan; */
+        /* width: 300px;
+        height: 250px; */
+        border: 1px solid black;
+        flex-wrap: wrap;
+      }
+      .items {
+        display: flex;
+        width: 200px;
+        height: 300px;
+        /* background-color: red; */
+        margin: 10px;
+        border: 1px solid black;
+        flex-wrap: wrap;
+      }
+      .photo-items {
+        width:100%;
+        /* border: 1px solid black; */
+      }
+      img {
+        width:100%;
+      }
+      .info {
+        margin: 1px 7px 0px 7px;
+        align-self: flex-end;
+      }
+      /* .seller-info {
+        align-self: flex-end;
+      }
+      .addtocart {
+        align-self: flex-end;
+      } */
+      .infoAndAdd {
+        display: flex;
+        align-self: flex-end;
+        flex-wrap: wrap;
+      }
+      .addtocart {
+        height: 40px;
+        font-size: 12.8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Tokosepedia</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Profile <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+
+      <div id="carouselExampleIndicators" class="carousel slide slideSize" data-ride="carousel">
+          <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+              <img class="d-block h-50 slideSize" src="279798_mountain_bike.jpg" alt="First slide">
+              <div class="carousel-caption d-none d-md-block">
+                  <h5>Slide 1</h5>
+                  <p>...</p>
+              </div>
+              </div>
+              <div class="carousel-item">
+              <img class="d-block h-50 slideSize" src="279896_fixie.jpg" alt="Second slide">
+              <div class="carousel-caption d-none d-md-block">
+                  <h5>Slide 2</h5>
+                  <p>...</p>
+              </div>
+              </div>
+              <div class="carousel-item">
+              <img class="d-block h-50 slideSize" src="280145_road_bike_carbon.jpg" alt="Third slide">
+              <div class="carousel-caption d-none d-md-block">
+                  <h5>Slide 3</h5>
+                  <p>...</p>
+              </div>
+              </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+          </a>
+      </div>
+
+
+      <div class="">
+        <div class="row">
+          <div class="sidebar col-md-2">
+            <div class="cart">
+
+              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Cart</button>
+
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Your Cart</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                      <!-- <p>{{ cart }}</p -->
+
+
+                      <table>
+                        <tr>
+                          <th>Item</th>
+                          <th>Price</th>
+                          <th>Seller</th>
+                          <th>Quantity</th>
+                        </tr>
+                        <tr v-for="item in cart">
+                          <td>{{ item.name }}</td>
+                          <td>{{ item.price }}</td>
+                          <td>{{ item.seller }}</td>
+                          <td><input id="number" type="number" value="1"></td>
+                        </tr>
+                      </table>
+
+
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+            <div class="category">
+              <h5>Category</h5>
+
+
+
+              <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sepeda
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Road Bike</a>
+                  <a class="dropdown-item" href="#">Fixed</a>
+                  <a class="dropdown-item" href="#">Mountain Bike</a>
+                  <a class="dropdown-item" href="#">BMX</a>
+                  <!-- <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a> -->
+                </div>
+              </div>
+
+
+
+
+            </div>
+          </div>
+          <div class="item-container col-md-10">
+            <div v-for="item in items" class="items">
+              <div class="photo-items">
+                <img src="http://d1o2knjzph7yt8.cloudfront.net/images/made/images/remote/https_polygoneeimages.s3.amazonaws.com/images/2489/helios_lt9x_p_duraace_352_198_c1_smart_scale.png">
+              </div>
+              <div class="info">
+                <h6>{{ item.itemName }}</h6>
+                <p>Rp {{ item.price }}</p>
+                <br>
+                <div class="infoAndAdd">
+                  <div class="seller-info col-md-6">
+                    {{ item.penjual }}
+                    <br>
+                    {{ item.rate }}
+                  </div>
+                  <button type="button" class="addtocart col-md-6" v-on:click="addToCart(item.itemName, item.price, item.penjual)">add to cart</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          items: [{
+            itemName: 'Mtb Mongoose Offroad',
+            price: 3000000,
+            penjual: 'Imran',
+            rate: '*****'
+          }, {
+            itemName: 'Trek 7000 Classic',
+            price: 2300000,
+            penjual: 'Musadeq',
+            rate: '****'
+          }, {
+            itemName: 'Polygon Collosus',
+            price: 2700000,
+            penjual: 'Muads',
+            rate: '*****'
+          }, {
+            itemName: 'Fixie Nnc',
+            price: 3100000,
+            penjual: 'Bongkeng',
+            rate: '****'
+          }, {
+            itemName: 'Sepeda Onthel Germany',
+            price:3500000,
+            penjual: 'Mat Kiding',
+            rate: '***'
+          }, {
+            itemName: 'Road Bike 1993',
+            price: 5000000,
+            penjual: 'Doni',
+            rate: '*****'
+          }, {
+            itemName: 'Campagnolo',
+            price: 7000000,
+            penjual: 'Tampu',
+            rate: '****'
+          }, {
+            itemName: 'Eddie Merck',
+            price: 3500000,
+            penjual: 'Mas Pulung',
+            rate: '****'
+          }, {
+            itemName: 'MTB Polygon',
+            price: 2900000,
+            penjual: 'Restu',
+            rate: '***'
+          }, {
+            itemName: 'Dahon',
+            price: 6000000,
+            penjual: 'Mulbul',
+            rate: '****'
+          }],
+          cart: []
+        },
+        methods: {
+          addToCart: function(item, harga, penjual) {
+            this.cart.push({name:item, price:harga, seller:penjual})
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
