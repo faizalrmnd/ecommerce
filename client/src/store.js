@@ -45,7 +45,7 @@ export default new Vuex.Store({
   actions: {
     register: function (context, payload) {
       console.log('masuk')
-      axios.post('http://localhost:3000/register', {
+      axios.post('http://35.186.155.103/register', {
         username: payload.username,
         password: payload.password,
         role: payload.role
@@ -59,7 +59,7 @@ export default new Vuex.Store({
         })
     },
     login: function (context, payload) {
-      axios.post('http://localhost:3000/login', {
+      axios.post('http://35.186.155.103/login', {
         username: payload.username,
         password: payload.password
       })
@@ -77,7 +77,7 @@ export default new Vuex.Store({
       let token = localStorage.getItem('token')
 
       axios
-        .get('http://localhost:3000/items', { headers: { token: token } })
+        .get('http://35.186.155.103/items', { headers: { token: token } })
         .then(response => {
           // If request is good...
           console.log(response.data)
@@ -91,7 +91,7 @@ export default new Vuex.Store({
       let token = localStorage.getItem('token')
 
       // console.log(payload)
-      axios.post('http://localhost:3000/items/additem', payload, { headers: { token: token } })
+      axios.post('http://35.186.155.103/items/additem', payload, { headers: { token: token } })
         .then(response => {
           console.log(response)
         })
