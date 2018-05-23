@@ -12,7 +12,7 @@ const itemsRouter = require('./routes/items');
 const app = express();
 app.use(cors())
 
-mongoose.connect('mongodb://localhost:27017/ecommerce');
+mongoose.connect('mongodb://faizal:faizaldb@ds159129.mlab.com:59129/ecommdb');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
