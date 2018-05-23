@@ -55,7 +55,9 @@ export default new Vuex.Store({
         })
           .then(function (response) {
             context.commit('setUser', payload)
+            console.log(response)
             localStorage.setItem('token', response.data.token)
+            localStorage.setItem('role', response.data.user.role)
             resolve()
           })
           .catch(function (error) {
@@ -67,18 +69,18 @@ export default new Vuex.Store({
     login: function (context, payload) {
       return new Promise((resolve, reject) => {
         axios.post('http://35.186.155.103/login', {
-          username: payload.username,
+          email: payload.email,
           password: payload.password
         })
           .then(function (response) {
             // console.log('response' + JSON.stringify(response.data.user.role))
-            localStorage.setItem('role', response.data.user.role)
-            context.commit('setUser', response.data.user)
-            localStorage.setItem('token', response.data.token)
+            // localStorage.setItem('role', response.data.user.role)
+            // context.commit('setUser', response.data.user)
+            // localStorage.setItem('token', response.data.token)
             resolve()
           })
           .catch(function (error) {
-            console.log(error)
+            console.log('kenapaya error')
             reject(error)
           })
       })

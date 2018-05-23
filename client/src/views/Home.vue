@@ -202,7 +202,7 @@ export default {
 
       this.$store.dispatch('login', payload)
       .then((loggedin) => {
-        this.$router.push('/catalogue')
+        // this.$router.push('/catalogue')
       })
       .catch((err) => {
         this.mauSubmit = true
@@ -230,7 +230,7 @@ export default {
     let token = localStorage.getItem('token')
 
     if (token) {
-      this.$router.push('/catalogue')
+      // this.$router.push('/catalogue')
     }
   }
 }

@@ -28,7 +28,8 @@ module.exports = {
             let token = jwt.sign({ id: result._id, email: result.email }, process.env.SECRET)
             res.status(201).json({
               message: 'successfully added a new user !',
-              token: token
+              token: token,
+              role: result.role
             })
           }
         })
@@ -47,13 +48,13 @@ module.exports = {
       .then(user => {
         if(bcrypt.compareSync(req.body.password, user.password)){
           let token = jwt.sign({ id: user._id, email: user.email }, process.env.SECRET)
-          let userInfo = {
-            email: user.email,
-            role: user.role
-          }
+          // let userInfo = {
+          //   email: user.email,
+          //   role: user.role
+          // }
           res.status(200).json({
             token: token,
-            user: userInfo
+            user: user.role
           })
         } else {
           res.status(500).json({
