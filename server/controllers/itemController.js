@@ -22,7 +22,7 @@ module.exports = {
         itemName: req.body.itemName,
         price: req.body.price,
         penjual: req.body.penjual,
-        stock: req.body.price,
+        stock: req.body.stock,
         image: req.file.cloudStoragePublicUrl
       })
 

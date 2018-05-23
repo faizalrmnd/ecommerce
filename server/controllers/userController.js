@@ -8,7 +8,7 @@ require('dotenv').config()
 module.exports = {
   signUp: function(req, res) {
     users.findOne({
-      username: req.body.username
+      email: req.body.email
     })
     .then(userData => {
       if(userData == null) {
@@ -16,7 +16,7 @@ module.exports = {
         let pass = bcrypt.hashSync(req.body.password, saltRounds);
     
         let newUser = new users({
-          username: req.body.username,
+          email: req.body.email,
           password: pass,
           role: req.body.role
         })
@@ -25,7 +25,7 @@ module.exports = {
           if(err) {
             console.log(err);
           } else {
-            let token = jwt.sign({ id: result._id, username: result.username }, process.env.SECRET)
+            let token = jwt.sign({ id: result._id, email: result.email }, process.env.SECRET)
             res.status(201).json({
               message: 'successfully added a new user !',
               token: token
@@ -34,7 +34,7 @@ module.exports = {
         })
       } else {
         res.status(400).json({
-          msg: 'Username taken, pick another username!'
+          msg: 'email taken, pick another email!'
         })
       }
     })
@@ -43,12 +43,12 @@ module.exports = {
   },
   signIn: function(req, res) {
     users
-      .findOne({ username: req.body.username})
+      .findOne({ email: req.body.email})
       .then(user => {
         if(bcrypt.compareSync(req.body.password, user.password)){
-          let token = jwt.sign({ id: user._id, username: user.username }, process.env.SECRET)
+          let token = jwt.sign({ id: user._id, email: user.email }, process.env.SECRET)
           let userInfo = {
-            username: user.username,
+            email: user.email,
             role: user.role
           }
           res.status(200).json({
@@ -57,13 +57,13 @@ module.exports = {
           })
         } else {
           res.status(500).json({
-            msg: 'wrong password or username!'
+            msg: 'wrong password or email!'
           })
         }
       })
       .catch(err => {
         res.status(500).json({
-          msg: 'wrong password or username!'
+          msg: 'wrong password or email!'
         })
       })
   }

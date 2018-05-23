@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navbar/>
     <!-- <button type="button" v-if="user.role == 'admin'" class="btn btn-primary">Add Item</button> -->
     <!-- Button trigger modal -->
     <button type="button" v-if="this.role == 'admin'" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -34,7 +35,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" @click="addItem" class="btn btn-primary">Save changes</button>
+            <button type="button" @click="addItem" data-dismiss="modal" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
@@ -48,6 +49,7 @@
 // @ is an alias to /src
 import ItemCard from '@/components/ItemCard.vue'
 import Cart from '@/components/Cart.vue'
+import navbar from '@/components/NavBar.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -62,7 +64,8 @@ export default {
   },
   components: {
     ItemCard,
-    Cart
+    Cart,
+    navbar
   },
   methods: {
     addItem: function () {

@@ -4,8 +4,9 @@
       <img class="card-img-top" :src="item.image" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{ item.itemName }}</h5>
-        <p class="card-text">{{ item.price }}</p>
-        <p class="card-text">{{ item.penjual }}</p>
+        <p class="card-text">Price: Rp {{ item.price }}</p>
+        <p class="card-text">Seller: {{ item.penjual }}</p>
+        <p class="card-text">Stock: {{ item.stock }}</p>
         <a href="#" @click="addToCart(item.itemName, item.price, item.penjual)" class="btn btn-primary">Add to Cart</a>
       </div>
     </div>

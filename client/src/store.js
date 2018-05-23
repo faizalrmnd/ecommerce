@@ -24,7 +24,6 @@ export default new Vuex.Store({
       state.itemList = payload.data
       // console.log(payload.data)
       console.log(state.itemList)
-      console.log(state.user)
     },
     setCart: function (state, payload) {
       if (state.itemCart.length > 0) {
@@ -40,38 +39,49 @@ export default new Vuex.Store({
         state.itemCart.push(payload)
       }
       // console.log(typeof state.itemCart)
+    },
+    addItemToList: function (state, payload) {
+      state.itemList.push(payload)
     }
   },
   actions: {
     register: function (context, payload) {
       console.log('masuk')
-      axios.post('http://35.186.155.103/register', {
-        username: payload.username,
-        password: payload.password,
-        role: payload.role
+      return new Promise((resolve, reject) => {
+        axios.post('http://35.186.155.103/register', {
+          email: payload.email,
+          password: payload.password,
+          role: payload.role
+        })
+          .then(function (response) {
+            context.commit('setUser', payload)
+            localStorage.setItem('token', response.data.token)
+            resolve()
+          })
+          .catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
       })
-        .then(function (response) {
-          context.commit('setUser', payload)
-          localStorage.setItem('token', response.data.token)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
     },
     login: function (context, payload) {
-      axios.post('http://35.186.155.103/login', {
-        username: payload.username,
-        password: payload.password
+      return new Promise((resolve, reject) => {
+        axios.post('http://35.186.155.103/login', {
+          username: payload.username,
+          password: payload.password
+        })
+          .then(function (response) {
+            // console.log('response' + JSON.stringify(response.data.user.role))
+            localStorage.setItem('role', response.data.user.role)
+            context.commit('setUser', response.data.user)
+            localStorage.setItem('token', response.data.token)
+            resolve()
+          })
+          .catch(function (error) {
+            console.log(error)
+            reject(error)
+          })
       })
-        .then(function (response) {
-          // console.log('response' + JSON.stringify(response.data.user.role))
-          localStorage.setItem('role', response.data.user.role)
-          context.commit('setUser', response.data.user)
-          localStorage.setItem('token', response.data.token)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
     },
     getItem: function (context) {
       let token = localStorage.getItem('token')
@@ -93,7 +103,8 @@ export default new Vuex.Store({
       // console.log(payload)
       axios.post('http://35.186.155.103/items/additem', payload, { headers: { token: token } })
         .then(response => {
-          console.log(response)
+          console.log(response.data.data)
+          context.commit('addItemToList', response.data.data)
         })
     },
     addToCart: function (context, payload) {

@@ -40,23 +40,27 @@ module.exports = {
     let token = req.headers.token;
 
     jwt.verify(token, process.env.SECRET, function(err, decoded) {
-      if(token){
+      if(token) {
         users.findOne({_id:ObjectID(decoded.id)})
-             .then(users => {
-               // console.log(users);
-               if(!users){
-                  res.status(401).json({
-                    message: "You are not authorized"
-                  })
-               } else if (users.role == 'admin') {
-                  next()
-               }
-             })
-             .catch(err =>{
-                res.status(500).json({
-                  message: err
+            .then(users => {
+              // console.log(users);
+              if(!users){
+                res.status(401).json({
+                  message: "You are not authorized"
                 })
-             })
+              } else if (users.role == 'admin') {
+                next()
+              } else {
+                res.status(401).json({
+                  message: "You are not authorized"
+                })
+              }
+            })
+            .catch(err =>{
+              res.status(500).json({
+                message: err
+              })
+            })
       } else {
         res.status(403).json({
           message: "You are not authorized"
