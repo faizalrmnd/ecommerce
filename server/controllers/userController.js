@@ -48,13 +48,13 @@ module.exports = {
       .then(user => {
         if(bcrypt.compareSync(req.body.password, user.password)){
           let token = jwt.sign({ id: user._id, email: user.email }, process.env.SECRET)
-          // let userInfo = {
-          //   email: user.email,
-          //   role: user.role
-          // }
+          let userInfo = {
+            email: user.email,
+            role: user.role
+          }
           res.status(200).json({
             token: token,
-            user: user.role
+            user: userInfo
           })
         } else {
           res.status(500).json({
